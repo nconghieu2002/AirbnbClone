@@ -1,7 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { publicRoutes } from './routes';
+import axios from 'axios';
 
 import DefaultLayout from '@/layout/DefaultLayout';
+
+axios.defaults.baseURL = 'http://localhost:4000';
 
 function App() {
     return (
