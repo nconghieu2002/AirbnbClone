@@ -1,0 +1,221 @@
+import { useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+
+function Places() {
+    const { action } = useParams();
+
+    const [title, setTitle] = useState('');
+    const [address, setAddress] = useState('');
+    const [addedPhotos, setAddedPhotos] = useState([]);
+    const [photoLink, setPhotoLink] = useState('');
+    const [description, setDescription] = useState('');
+    const [perks, setPerks] = useState([]);
+    const [extraInfo, setExtraInfo] = useState('');
+    const [checkIn, setCheckIn] = useState('');
+    const [checkOut, setCheckOut] = useState('');
+    const [maxGuests, setMaxGuests] = useState(1);
+
+    return (
+        <div>
+            {action !== 'new' && (
+                <div className="text-center">
+                    <Link
+                        to={'/account/places/new'}
+                        className="inline-flex gap-1 bg-primary text-white py-2 px-6 rounded-full"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                        Add new place
+                    </Link>
+                </div>
+            )}
+            {action === 'new' && (
+                <div>
+                    <form>
+                        <h2 className="text-2xl mt-4">Title</h2>
+                        <p className="text-sm text-gray-500">
+                            Title for your place, should be short and catchy as in advertisement
+                        </p>
+                        <input type="text" placeholder="title, for example: My lovely apt" />
+                        <h2 className="text-2xl mt-4">Address</h2>
+                        <p className="text-sm text-gray-500">Address to this place</p>
+                        <input type="text" placeholder="address" />
+                        <h2 className="text-2xl mt-4">Photos</h2>
+                        <p className="text-sm text-gray-500">more = better</p>
+                        <div className="flex gap-2">
+                            <input type="text" placeholder="Add using a link ...jpg" />
+                            <button className="bg-gray-200 px-4 rounded-2xl">Add&nbsp;photo</button>
+                        </div>
+                        <div className="mt-2 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+                            <button className="flex justify-center gap-1 border bg-transparent rounded-2xl p-8">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="w-6 h-6"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+                                    />
+                                </svg>
+                                Upload
+                            </button>
+                        </div>
+                        <h2 className="text-2xl mt-4">Description</h2>
+                        <p className="text-sm text-gray-500">description of the place</p>
+                        <textarea rows="5" />
+                        <h2 className="text-2xl mt-4">Perks</h2>
+                        <p className="text-sm text-gray-500">select all the perks of your place</p>
+                        <div className="gap-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mt-2">
+                            <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
+                                <input type="checkbox" />
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="1.5"
+                                    stroke="currentColor"
+                                    className="w-6 h-6"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M8.288 15.038a5.25 5.25 0 017.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 011.06 0z"
+                                    />
+                                </svg>
+                                <span>Wifi</span>
+                            </label>
+                            <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
+                                <input type="checkbox" />
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="w-6 h-6"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
+                                    />
+                                </svg>
+                                <span>Free parking spot</span>
+                            </label>
+                            <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
+                                <input type="checkbox" />
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="1.5"
+                                    stroke="currentColor"
+                                    className="w-6 h-6"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M6 20.25h12m-7.5-3v3m3-3v3m-10.125-3h17.25c.621 0 1.125-.504 1.125-1.125V4.875c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125z"
+                                    />
+                                </svg>
+                                <span>TV</span>
+                            </label>
+                            <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
+                                <input type="checkbox" />
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="w-6 h-6"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M3.75 7.5l16.5-4.125M12 6.75c-2.708 0-5.363.224-7.948.655C2.999 7.58 2.25 8.507 2.25 9.574v9.176A2.25 2.25 0 004.5 21h15a2.25 2.25 0 002.25-2.25V9.574c0-1.067-.75-1.994-1.802-2.169A48.329 48.329 0 0012 6.75zm-1.683 6.443l-.005.005-.006-.005.006-.005.005.005zm-.005 2.127l-.005-.006.005-.005.005.005-.005.005zm-2.116-.006l-.005.006-.006-.006.005-.005.006.005zm-.005-2.116l-.006-.005.006-.005.005.005-.005.005zM9.255 10.5v.008h-.008V10.5h.008zm3.249 1.88l-.007.004-.003-.007.006-.003.004.006zm-1.38 5.126l-.003-.006.006-.004.004.007-.006.003zm.007-6.501l-.003.006-.007-.003.004-.007.006.004zm1.37 5.129l-.007-.004.004-.006.006.003-.004.007zm.504-1.877h-.008v-.007h.008v.007zM9.255 18v.008h-.008V18h.008zm-3.246-1.87l-.007.004L6 16.127l.006-.003.004.006zm1.366-5.119l-.004-.006.006-.004.004.007-.006.003zM7.38 17.5l-.003.006-.007-.003.004-.007.006.004zm-1.376-5.116L6 12.38l.003-.007.007.004-.004.007zm-.5 1.873h-.008v-.007h.008v.007zM17.25 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zm0 4.5a.75.75 0 110-1.5.75.75 0 010 1.5z"
+                                    />
+                                </svg>
+                                <span>Radio</span>
+                            </label>
+                            <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
+                                <input type="checkbox" />
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="1.5"
+                                    stroke="currentColor"
+                                    className="w-6 h-6"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M12 12.75c1.148 0 2.278.08 3.383.237 1.037.146 1.866.966 1.866 2.013 0 3.728-2.35 6.75-5.25 6.75S6.75 18.728 6.75 15c0-1.046.83-1.867 1.866-2.013A24.204 24.204 0 0112 12.75zm0 0c2.883 0 5.647.508 8.207 1.44a23.91 23.91 0 01-1.152 6.06M12 12.75c-2.883 0-5.647.508-8.208 1.44.125 2.104.52 4.136 1.153 6.06M12 12.75a2.25 2.25 0 002.248-2.354M12 12.75a2.25 2.25 0 01-2.248-2.354M12 8.25c.995 0 1.971-.08 2.922-.236.403-.066.74-.358.795-.762a3.778 3.778 0 00-.399-2.25M12 8.25c-.995 0-1.97-.08-2.922-.236-.402-.066-.74-.358-.795-.762a3.734 3.734 0 01.4-2.253M12 8.25a2.25 2.25 0 00-2.248 2.146M12 8.25a2.25 2.25 0 012.248 2.146M8.683 5a6.032 6.032 0 01-1.155-1.002c.07-.63.27-1.222.574-1.747m.581 2.749A3.75 3.75 0 0115.318 5m0 0c.427-.283.815-.62 1.155-.999a4.471 4.471 0 00-.575-1.752M4.921 6a24.048 24.048 0 00-.392 3.314c1.668.546 3.416.914 5.223 1.082M19.08 6c.205 1.08.337 2.187.392 3.314a23.882 23.882 0 01-5.223 1.082"
+                                    />
+                                </svg>
+                                <span>Pets</span>
+                            </label>
+                            <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
+                                <input type="checkbox" />
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="1.5"
+                                    stroke="currentColor"
+                                    className="w-6 h-6"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.016a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.75c0 .415.336.75.75.75z"
+                                    />
+                                </svg>
+                                <span>Private entrance</span>
+                            </label>
+                        </div>
+                        <h2 className="text-2xl mt-4">Extra info</h2>
+                        <p className="text-sm text-gray-500">house rules, etc</p>
+                        <textarea />
+                        <h2 className="text-2xl mt-4">Check in&out times</h2>
+                        <p className="text-sm text-gray-500">
+                            add check in and out times, remember to have some time window for cleaning the room between
+                            guests
+                        </p>
+                        <div className="grid grid-cols-3 gap-2">
+                            <div>
+                                <h3 className="mt-2 -mb-1">Check in time</h3>
+                                <input type="text" placeholder="14:00" />
+                            </div>
+                            <div>
+                                <h3 className="mt-2 -mb-1">Check out time</h3>
+                                <input type="text" placeholder="12:00" />
+                            </div>
+                            <div>
+                                <h3 className="mt-2 -mb-1">Max number of guests</h3>
+                                <input type="text" placeholder="" />
+                            </div>
+                        </div>
+                        <button className="primary mt-4">Save</button>
+                    </form>
+                </div>
+            )}
+        </div>
+    );
+}
+
+export default Places;

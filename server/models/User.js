@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const UserSchema = new Schema({
+const userSchema = new Schema({
   name: {
     type: String,
   },
@@ -15,6 +15,6 @@ const UserSchema = new Schema({
   },
 });
 
-const UserModal = mongoose.model("User", UserSchema);
+const UserModal = mongoose.model("User", userSchema);
 
 export default UserModal;
