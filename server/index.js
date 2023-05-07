@@ -4,7 +4,7 @@ import cors from 'cors';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
-import download from 'image-downloader';
+import imageDownload from 'image-downloader';
 
 import User from './models/User.js';
 import { config } from 'dotenv';
@@ -16,6 +16,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use('/uploads', express.static(process.cwd() + '/uploads'));
 app.use(
     cors({
         credentials: true,
@@ -104,8 +105,8 @@ app.post('/logout', (req, res) => {
 console.log(process.cwd());
 app.post('/upload-by-link', async (req, res) => {
     const { link } = req.body;
-    const newName = Date.now() + '.jpg';
-    await download.image({
+    const newName = 'photo' + Date.now() + '.jpg';
+    await imageDownload.image({
         url: link,
         dest: process.cwd() + '/uploads/' + newName
     });
