@@ -4,6 +4,7 @@ import cors from 'cors';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
+import download from 'image-downloader';
 
 import User from './models/User.js';
 import { config } from 'dotenv';
@@ -98,6 +99,18 @@ app.get('/profile', (req, res) => {
 
 app.post('/logout', (req, res) => {
     res.cookie('token', '').json(true);
+});
+
+console.log(process.cwd());
+app.post('/upload-by-link', async (req, res) => {
+    const { link } = req.body;
+    const newName = Date.now() + '.jpg';
+    await download.image({
+        url: link,
+        dest: process.cwd() + '/uploads/' + newName
+    });
+
+    res.json(newName);
 });
 
 app.listen(4000);
