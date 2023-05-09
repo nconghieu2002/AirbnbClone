@@ -11,7 +11,8 @@ const publicRoutes = [
     { path: '/register', component: Register },
     { path: '/account', component: Profile },
     { path: '/account/places', component: Places },
-    { path: '/account/places/new', component: PlacesForm }
+    { path: '/account/places/new', component: PlacesForm },
+    { path: '/account/places/:id', component: PlacesForm },
 ];
 
 const privateRoutes = [];
