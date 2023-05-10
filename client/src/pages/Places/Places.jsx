@@ -8,7 +8,7 @@ function Places() {
     const [places, setPlaces] = useState([]);
 
     useEffect(() => {
-        axios.get('/places').then(({ data }) => {
+        axios.get('/user-places').then(({ data }) => {
             setPlaces(data);
         });
     }, []);
@@ -40,14 +40,18 @@ function Places() {
                         <Link
                             to={`/account/places/${place._id}`}
                             key={place._id}
-                            className="flex gap-4 bg-gray-200 p-4 rounded-2xl cursor-pointer"
+                            className="flex gap-4 bg-gray-200 p-4 rounded-2xl cursor-pointer mb-4"
                         >
-                            <div className="flex w-44 h-28">
+                            <div className="flex shrink-0 h-32 w-36">
                                 {place.photos.length > 0 && (
-                                    <img className='object-cover' src={`http://localhost:4000/uploads/${place.photos[0]}`} alt="" />
+                                    <img
+                                        className="object-cover aspect-square w-full h-full"
+                                        src={`http://localhost:4000/uploads/${place.photos[0]}`}
+                                        alt=""
+                                    />
                                 )}
                             </div>
-                            <div>
+                            <div className="">
                                 <h2 className="text-xl">{place.title}</h2>
                                 <p className="text-sm mt-2">{place.description}</p>
                             </div>

@@ -17,6 +17,7 @@ function PlacesForm() {
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
     const [maxGuests, setMaxGuests] = useState(1);
+    const [price, setPrice] = useState(100);
     const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
@@ -35,6 +36,7 @@ function PlacesForm() {
             setCheckIn(data.checkIn);
             setCheckOut(data.checkOut);
             setMaxGuests(data.maxGuests);
+            setPrice(data.price);
         });
     }, [id]);
 
@@ -66,7 +68,8 @@ function PlacesForm() {
             extraInfo,
             checkIn,
             checkOut,
-            maxGuests
+            maxGuests,
+            price
         };
 
         if (id) {
@@ -107,7 +110,7 @@ function PlacesForm() {
                     'Check in&out times',
                     'Add check in and out times, remember to have some time window for cleaning the room between guests'
                 )}
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid lg:grid-cols-4 grid-cols-2 gap-2">
                     <div>
                         <h3 className="mt-2 -mb-1">Check in time</h3>
                         <input
@@ -129,6 +132,14 @@ function PlacesForm() {
                     <div>
                         <h3 className="mt-2 -mb-1">Max number of guests</h3>
                         <input type="number" value={maxGuests} onChange={(e) => setMaxGuests(e.target.value)} />
+                    </div>
+                    <div>
+                        <h3 className="mt-2 -mb-1">Price per night</h3>
+                        <input
+                            type="number"
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                        />
                     </div>
                 </div>
                 <button className="primary mt-4">Save</button>

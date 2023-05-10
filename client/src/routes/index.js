@@ -3,6 +3,7 @@ import Register from '@/pages/Register';
 import Home from '@/pages/Home';
 import Profile from '@/pages/Profile';
 import Places from '@/pages/Places';
+import Place from '@/pages/Place';
 import PlacesForm from '@/pages/Places/PlacesForm';
 
 const publicRoutes = [
@@ -13,6 +14,7 @@ const publicRoutes = [
     { path: '/account/places', component: Places },
     { path: '/account/places/new', component: PlacesForm },
     { path: '/account/places/:id', component: PlacesForm },
+    { path: '/place/:id', component: Place }
 ];
 
 const privateRoutes = [];
