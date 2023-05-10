@@ -9,7 +9,7 @@ function Header() {
 
     return (
         <div>
-            <header className=" flex justify-between">
+            <header className="flex justify-between">
                 <Link to={'/'} className="flex items-center gap-1">
                     <FaAirbnb />
                     <span>airbnb</span>
