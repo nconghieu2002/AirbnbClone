@@ -10,6 +10,7 @@ import fs from 'fs';
 
 import User from './models/User.js';
 import Place from './models/Place.js';
+import Booking from './models/Booking.js';
 import { config } from 'dotenv';
 config();
 
@@ -37,6 +38,15 @@ const dbConnect = async () => {
 };
 
 dbConnect();
+
+const getUserDataFromReq = (req) => {
+    return new Promise((resolve, reject) => {
+        jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
+            if (err) throw err;
+            resolve(userData);
+        });
+    });
+};
 
 app.get('/test', (req, res) => {
     res.json('ok');
@@ -133,7 +143,8 @@ app.post('/upload', photosMiddleware.array('photos', 100), (req, res) => {
 
 app.post('/places', async (req, res) => {
     const { token } = req.cookies;
-    const { title, address, addedPhotos, description, perks, extraInfo, checkIn, checkOut, maxGuests, price } = req.body;
+    const { title, address, addedPhotos, description, perks, extraInfo, checkIn, checkOut, maxGuests, price } =
+        req.body;
 
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
         if (err) throw err;
@@ -171,7 +182,8 @@ app.get('/places/:id', async (req, res) => {
 
 app.put('/places', async (req, res) => {
     const { token } = req.cookies;
-    const { id, title, address, addedPhotos, description, perks, extraInfo, checkIn, checkOut, maxGuests, price } = req.body;
+    const { id, title, address, addedPhotos, description, perks, extraInfo, checkIn, checkOut, maxGuests, price } =
+        req.body;
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
         const placeDoc = await Place.findById(id);
         if (userData.id === placeDoc.owner.toString()) {
@@ -194,7 +206,37 @@ app.put('/places', async (req, res) => {
 });
 
 app.get('/places', async (req, res) => {
-    res.json(await Place.find())
-})
+    res.json(await Place.find());
+});
+
+app.post('/bookings', async (req, res) => {
+    try {
+        const userData = await getUserDataFromReq(req);
+        const { checkIn, checkOut, numberOfGuests, name, phone, price, place } = req.body;
+
+        const bookingDoc = await Booking.create({
+            user: userData.id,
+            checkIn,
+            checkOut,
+            numberOfGuests,
+            name,
+            phone,
+            price,
+            place
+        });
+        res.json(bookingDoc);
+    } catch (err) {
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+app.get('/bookings', async (req, res) => {
+    try {
+        const userData = await getUserDataFromReq(req);
+        res.json(await Booking.find({ user: userData.id }).populate('place'));
+    } catch (err) {
+        res.json('err');
+    }
+});
 
 app.listen(4000);

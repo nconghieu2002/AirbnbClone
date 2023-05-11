@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import BookingCard from '../../components/BookingCard';
 
 function Place() {
     const { id } = useParams();
@@ -68,30 +69,29 @@ function Place() {
                         d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                     />
                 </svg>
-
                 {place.address}
             </a>
             <div className="relative">
                 <div className="grid gap-2 grid-cols-[1fr_1fr] rounded-2xl overflow-hidden">
                     <div>
                         {place.photos?.[0] && (
-                            <img className="object-cover" src={`http://localhost:4000/uploads/${place.photos[0]}`} />
+                            <img onClick={()=>setShowAllPhotos(true)}  className="object-cover cursor-pointer" src={`http://localhost:4000/uploads/${place.photos[0]}`} />
                         )}
                     </div>
                     <div className="grid gap-2 grid-cols-[1fr_1fr]">
                         <div className="grid">
                             <div className="overflow-hidden">
                                 {place.photos?.[1] && (
-                                    <img
-                                        className="object-cover relative -top-1"
+                                    <img onClick={()=>setShowAllPhotos(true)}
+                                        className="object-cover cursor-pointer relative -top-1"
                                         src={`http://localhost:4000/uploads/${place.photos[1]}`}
                                     />
                                 )}
                             </div>
                             <div className="overflow-hidden">
                                 {place.photos?.[2] && (
-                                    <img
-                                        className="object-cover relative top-1"
+                                    <img onClick={()=>setShowAllPhotos(true)}
+                                        className="object-cover cursor-pointer relative top-1"
                                         src={`http://localhost:4000/uploads/${place.photos[2]}`}
                                     />
                                 )}
@@ -100,16 +100,16 @@ function Place() {
                         <div className="grid">
                             <div className="overflow-hidden">
                                 {place.photos?.[3] && (
-                                    <img
-                                        className="object-cover relative -top-1"
+                                    <img onClick={()=>setShowAllPhotos(true)}
+                                        className="object-cover cursor-pointer relative -top-1"
                                         src={`http://localhost:4000/uploads/${place.photos[3]}`}
                                     />
                                 )}
                             </div>
                             <div className="overflow-hidden">
                                 {place.photos?.[4] && (
-                                    <img
-                                        className="object-cover relative top-1"
+                                    <img onClick={()=>setShowAllPhotos(true)}
+                                        className="object-cover cursor-pointer relative top-1"
                                         src={`http://localhost:4000/uploads/${place.photos[4]}`}
                                     />
                                 )}
@@ -137,6 +137,26 @@ function Place() {
                     </svg>
                     Show more photos
                 </button>
+            </div>
+            <div className="mt-8 gap-16 grid grid-cols-1 md:grid-cols-[2fr_1fr]">
+                <div>
+                    <div className="my-4">
+                        <h2 className="font-semibold text-2xl">Description</h2>
+                        {place.description}
+                    </div>
+                    <div>
+                        Check in: {place.checkIn}
+                        <br />
+                        Check out: {place.checkOut}
+                        <br />
+                        Max number of guests: {place.maxGuests}
+                    </div>
+                    <div className="my-4">
+                        <h2 className="font-semibold text-2xl">Extra info</h2>
+                        <div className="mt-2 text-sm text-gray-700 leading-4">{place.extraInfo}</div>
+                    </div>
+                </div>
+                <BookingCard place={place} />
             </div>
         </div>
     );
