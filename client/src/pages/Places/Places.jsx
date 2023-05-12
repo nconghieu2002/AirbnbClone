@@ -45,7 +45,7 @@ function Places() {
                             <div className="flex shrink-0 h-32 w-36">
                                 {place.photos.length > 0 && (
                                     <img
-                                        className="object-cover aspect-square w-full h-full"
+                                        className="object-cover w-full h-full"
                                         src={`http://localhost:4000/uploads/${place.photos[0]}`}
                                         alt=""
                                     />
