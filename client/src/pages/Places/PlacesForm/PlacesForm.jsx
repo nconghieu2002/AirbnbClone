@@ -4,7 +4,7 @@ import { Navigate, useParams } from 'react-router-dom';
 
 import Perks from '@/components/Perks';
 import PhotosUploader from '@/components/PhotosUploader';
-import AccountNav from '@/pages/AccountNav';
+import AccountNav from '@/components/AccountNav';
 
 function PlacesForm() {
     const { id } = useParams();

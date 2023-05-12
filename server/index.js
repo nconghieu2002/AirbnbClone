@@ -48,53 +48,98 @@ const getUserDataFromReq = (req) => {
     });
 };
 
-app.get('/test', (req, res) => {
-    res.json('ok');
-});
+// app.post('/register', async (req, res) => {
+//     const { name, email, password } = req.body;
+//     const passwordHash = bcrypt.hashSync(password, 10);
+
+//     try {
+//         const userDoc = await User.create({
+//             name,
+//             email,
+//             password: passwordHash
+//         });
+
+//         res.json(userDoc);
+//     } catch (err) {
+//         res.status(422).json(err);
+//     }
+// });
+
+// app.post('/login', async (req, res) => {
+//     const { email, password } = req.body;
+
+//     const userDoc = await User.findOne({ email });
+//     if (userDoc) {
+//         const passOk = bcrypt.compareSync(password, userDoc.password);
+//         if (passOk) {
+//             jwt.sign(
+//                 {
+//                     email: userDoc.email,
+//                     id: userDoc._id
+//                 },
+//                 jwtSecret,
+//                 {},
+//                 (err, token) => {
+//                     if (err) {
+//                         throw err;
+//                     }
+//                     res.cookie('token', token).json(userDoc);
+//                 }
+//             );
+//         } else {
+//             res.status(422).json('pass not ok');
+//         }
+//     } else {
+//         res.json('not found');
+//     }
+// });
 
 app.post('/register', async (req, res) => {
-    const { name, email, password } = req.body;
-    const passwordHash = bcrypt.hashSync(password, 10);
-
     try {
+        const { name, email, password } = req.body;
+        const passwordHash = bcrypt.hashSync(password, 10);
         const userDoc = await User.create({
             name,
             email,
             password: passwordHash
         });
-
-        res.json(userDoc);
+        res.status(201).json(userDoc);
     } catch (err) {
-        res.status(422).json(err);
+        res.status(401).json({
+            message: err.message
+        });
     }
 });
 
 app.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-
-    const userDoc = await User.findOne({ email });
-    if (userDoc) {
-        const passOk = bcrypt.compareSync(password, userDoc.password);
-        if (passOk) {
-            jwt.sign(
-                {
-                    email: userDoc.email,
-                    id: userDoc._id
-                },
-                jwtSecret,
-                {},
-                (err, token) => {
-                    if (err) {
-                        throw err;
+    try {
+        const { email, password } = req.body;
+        const userDoc = await User.findOne({ email });
+        if (userDoc) {
+            const passOk = bcrypt.compareSync(password, userDoc.password);
+            if (passOk) {
+                jwt.sign(
+                    {
+                        email: userDoc.email,
+                        id: userDoc._id
+                    },
+                    jwtSecret,
+                    {},
+                    (err, token) => {
+                        if (err) {
+                            throw err;
+                        }
+                        res.cookie('token', token).json(userDoc);
                     }
-                    res.cookie('token', token).json(userDoc);
-                }
-            );
+                );
+            } else {
+                res.status(422).json('pass not ok');
+            }
         } else {
-            res.status(422).json('pass not ok');
+            res.status(400).json('not found');
         }
-    } else {
-        res.json('not found');
+    } catch (err) {
+        res.status(401).json({ message: err.message });
     }
 });
 

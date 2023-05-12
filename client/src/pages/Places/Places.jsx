@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import AccountNav from '@/pages/AccountNav';
+import AccountNav from '@/components/AccountNav';
 
 function Places() {
     const [places, setPlaces] = useState([]);

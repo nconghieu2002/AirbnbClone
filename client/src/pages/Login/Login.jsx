@@ -14,7 +14,7 @@ function Login() {
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.post('/login', { email, password });
+        const { data } = await axios.post('/login', { email, password });
             setUser(data);
             alert('Login successful');
             setRedirect(true);

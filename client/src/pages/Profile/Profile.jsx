@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
-import {  Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 import { UserContext } from '@/UserContext';
 import Places from '@/pages/Places';
-import AccountNav from '@/pages/AccountNav';
+import AccountNav from '@/components/AccountNav';
 
 function Profile() {
     const { user, ready, setUser } = useContext(UserContext);
@@ -20,7 +20,6 @@ function Profile() {
         subpage = 'profile';
     }
 
-
     const logout = async () => {
         await axios.post('/logout');
         setRedirect('/');
@@ -33,7 +32,7 @@ function Profile() {
 
     return (
         <div>
-           <AccountNav />
+            <AccountNav />
             {subpage === 'profile' && (
                 <div className="text-center">
                     Logged in as {user.name} ({user.email})<br />
