@@ -10,8 +10,8 @@ axios.defaults.withCredentials = true;
 
 function App() {
     return (
-        <UserContextProvider>
-            <Router>
+        <Router>
+            <UserContextProvider>
                 <div className="App">
                     <Routes>
                         {publicRoutes.map((route, index) => {
@@ -30,8 +30,8 @@ function App() {
                         })}
                     </Routes>
                 </div>
-            </Router>
-        </UserContextProvider>
+            </UserContextProvider>
+        </Router>
     );
 }
 

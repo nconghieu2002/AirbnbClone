@@ -26,18 +26,26 @@ function BookingCard({ place }) {
     }
 
     const bookThisPlace = async () => {
-        const response = await axios.post('/bookings', {
-            checkIn,
-            checkOut,
-            numberOfGuests,
-            name,
-            phone,
-            price: numberOfNights * place.price,
-            place: place._id
-        });
+        try {
+            if (!checkIn || !checkOut || !name || !phone) {
+                return;
+            }
 
-        const bookingId = response.data._id;
-        setRedirect(`/account/bookings/${bookingId}`);
+            const response = await axios.post('/bookings', {
+                checkIn,
+                checkOut,
+                numberOfGuests,
+                name,
+                phone,
+                price: numberOfNights * place.price,
+                place: place._id
+            });
+
+            const bookingId = response.data._id;
+            setRedirect(`/account/bookings/${bookingId}`);
+        } catch (error) {
+            setRedirect(`/login`);
+        }
     };
 
     if (redirect) {

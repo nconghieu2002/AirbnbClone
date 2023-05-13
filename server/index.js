@@ -11,6 +11,7 @@ import fs from 'fs';
 import User from './models/User.js';
 import Place from './models/Place.js';
 import Booking from './models/Booking.js';
+import authMiddleware from './middlewares/authMiddleware.js';
 import { config } from 'dotenv';
 config();
 
@@ -39,60 +40,14 @@ const dbConnect = async () => {
 
 dbConnect();
 
-const getUserDataFromReq = (req) => {
-    return new Promise((resolve, reject) => {
-        jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
-            if (err) throw err;
-            resolve(userData);
-        });
-    });
-};
-
-// app.post('/register', async (req, res) => {
-//     const { name, email, password } = req.body;
-//     const passwordHash = bcrypt.hashSync(password, 10);
-
-//     try {
-//         const userDoc = await User.create({
-//             name,
-//             email,
-//             password: passwordHash
+// const getUserDataFromReq = (req) => {
+//     return new Promise((resolve, reject) => {
+//         jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
+//             if (err) throw err;
+//             resolve(userData);
 //         });
-
-//         res.json(userDoc);
-//     } catch (err) {
-//         res.status(422).json(err);
-//     }
-// });
-
-// app.post('/login', async (req, res) => {
-//     const { email, password } = req.body;
-
-//     const userDoc = await User.findOne({ email });
-//     if (userDoc) {
-//         const passOk = bcrypt.compareSync(password, userDoc.password);
-//         if (passOk) {
-//             jwt.sign(
-//                 {
-//                     email: userDoc.email,
-//                     id: userDoc._id
-//                 },
-//                 jwtSecret,
-//                 {},
-//                 (err, token) => {
-//                     if (err) {
-//                         throw err;
-//                     }
-//                     res.cookie('token', token).json(userDoc);
-//                 }
-//             );
-//         } else {
-//             res.status(422).json('pass not ok');
-//         }
-//     } else {
-//         res.json('not found');
-//     }
-// });
+//     });
+// };
 
 app.post('/register', async (req, res) => {
     try {
@@ -143,7 +98,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.get('/profile', (req, res) => {
+app.get('/profile', authMiddleware, async (req, res) => {
     const { token } = req.cookies;
     if (token) {
         jwt.verify(token, jwtSecret, {}, async (err, userData) => {
@@ -186,16 +141,50 @@ app.post('/upload', photosMiddleware.array('photos', 100), (req, res) => {
     res.json(uploadedFiles);
 });
 
-app.post('/places', async (req, res) => {
-    const { token } = req.cookies;
+app.post('/places', authMiddleware, async (req, res) => {
+    const userData = req.userData;
+
     const { title, address, addedPhotos, description, perks, extraInfo, checkIn, checkOut, maxGuests, price } =
         req.body;
 
-    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
-        if (err) throw err;
+    const placeDoc = await Place.create({
+        owner: userData.id,
+        title,
+        address,
+        photos: addedPhotos,
+        description,
+        perks,
+        extraInfo,
+        checkIn,
+        checkOut,
+        maxGuests,
+        price
+    });
 
-        const placeDoc = await Place.create({
-            owner: userData.id,
+    res.json(placeDoc);
+});
+
+app.get('/user-places', authMiddleware, async (req, res) => {
+    const userData = req.userData;
+
+    const { id } = userData;
+    res.json(await Place.find({ owner: id }));
+});
+
+app.get('/places/:id', async (req, res) => {
+    const { id } = req.params;
+    res.json(await Place.findById(id));
+});
+
+app.put('/places', authMiddleware, async (req, res) => {
+    const userData = req.userData;
+
+    const { id, title, address, addedPhotos, description, perks, extraInfo, checkIn, checkOut, maxGuests, price } =
+        req.body;
+
+    const placeDoc = await Place.findById(id);
+    if (userData.id === placeDoc.owner.toString()) {
+        placeDoc.set({
             title,
             address,
             photos: addedPhotos,
@@ -207,56 +196,19 @@ app.post('/places', async (req, res) => {
             maxGuests,
             price
         });
-
-        res.json(placeDoc);
-    });
-});
-
-app.get('/user-places', (req, res) => {
-    const { token } = req.cookies;
-    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
-        const { id } = userData;
-        res.json(await Place.find({ owner: id }));
-    });
-});
-
-app.get('/places/:id', async (req, res) => {
-    const { id } = req.params;
-    res.json(await Place.findById(id));
-});
-
-app.put('/places', async (req, res) => {
-    const { token } = req.cookies;
-    const { id, title, address, addedPhotos, description, perks, extraInfo, checkIn, checkOut, maxGuests, price } =
-        req.body;
-    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
-        const placeDoc = await Place.findById(id);
-        if (userData.id === placeDoc.owner.toString()) {
-            placeDoc.set({
-                title,
-                address,
-                photos: addedPhotos,
-                description,
-                perks,
-                extraInfo,
-                checkIn,
-                checkOut,
-                maxGuests,
-                price
-            });
-            placeDoc.save();
-            res.json('oke');
-        }
-    });
+        placeDoc.save();
+        res.json('oke');
+    }
 });
 
 app.get('/places', async (req, res) => {
     res.json(await Place.find());
 });
 
-app.post('/bookings', async (req, res) => {
+app.post('/bookings', authMiddleware, async (req, res) => {
     try {
-        const userData = await getUserDataFromReq(req);
+        const userData = req.userData;
+
         const { checkIn, checkOut, numberOfGuests, name, phone, price, place } = req.body;
 
         const bookingDoc = await Booking.create({
@@ -269,15 +221,16 @@ app.post('/bookings', async (req, res) => {
             price,
             place
         });
+
         res.json(bookingDoc);
     } catch (err) {
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(401).json({ message: err.message });
     }
 });
 
-app.get('/bookings', async (req, res) => {
+app.get('/bookings', authMiddleware, async (req, res) => {
     try {
-        const userData = await getUserDataFromReq(req);
+        const userData = req.userData;
         res.json(await Booking.find({ user: userData.id }).populate('place'));
     } catch (err) {
         res.json('err');
