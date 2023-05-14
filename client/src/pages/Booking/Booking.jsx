@@ -36,7 +36,7 @@ function Booking() {
                 </div>
                 <div className='bg-primary p-6 text-white rounded-2xl'>
                     <div>Total price</div>
-                    <div className='text-3xl'>{booking.price}</div>
+                    <div className='text-3xl'>$ {booking.price}</div>
                 </div>
             </div>
             <PlaceGallery place={booking.place} />

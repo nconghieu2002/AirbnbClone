@@ -23,18 +23,26 @@ function Place() {
     return (
         <div className="mt-4 bg-gray-100 -mx-20 px-20 py-8">
             <h1 className="text-3xl">{place.title}</h1>
-            <AddressLink children={place.address} className='my-3' />
+            <AddressLink children={place.address} className="my-3" />
             <PlaceGallery place={place} />
             <div className="mt-8 gap-16 grid grid-cols-1 md:grid-cols-[2fr_1fr]">
                 <div>
+                    <div className="flex justify-between">
+                        <div className="font-semibold text-2xl">Resort hosted by {place.owner.name}</div>
+                        <img
+                            className="h-10 w-10 rounded-full"
+                            src="https://tse3.mm.bing.net/th?id=OIP.JZBTJtNF8UwcrOQhh-UgogAAAA&pid=Api&P=0"
+                        />
+                    </div>
+                    <div className="border-t border-gray-300 mt-4"></div>
                     <div className="my-4">
                         <h2 className="font-semibold text-2xl">Description</h2>
                         {place.description}
                     </div>
-                    <div>
-                        Check in: {place.checkIn}
+                    <div className="font-semibold">
+                        Check in: {place.checkIn}h
                         <br />
-                        Check out: {place.checkOut}
+                        Check out: {place.checkOut}h
                         <br />
                         Max number of guests: {place.maxGuests}
                     </div>

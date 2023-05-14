@@ -40,15 +40,6 @@ const dbConnect = async () => {
 
 dbConnect();
 
-// const getUserDataFromReq = (req) => {
-//     return new Promise((resolve, reject) => {
-//         jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
-//             if (err) throw err;
-//             resolve(userData);
-//         });
-//     });
-// };
-
 app.post('/register', async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -173,7 +164,7 @@ app.get('/user-places', authMiddleware, async (req, res) => {
 
 app.get('/places/:id', async (req, res) => {
     const { id } = req.params;
-    res.json(await Place.findById(id));
+    res.json(await Place.findById(id).populate('owner'));
 });
 
 app.put('/places', authMiddleware, async (req, res) => {
