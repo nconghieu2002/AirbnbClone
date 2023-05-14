@@ -153,7 +153,7 @@ function Place() {
                     </div>
                     <div className="border-t border-gray-300 mt-6"></div>
                     <h2 className="font-semibold text-2xl mt-6 mb-4">What this place offers</h2>
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-2 gap-2 ">
                         {place.perks.map((perk, value) => (
                             <div key={value}>{listPerksRender[perk]}</div>
                         ))}
@@ -163,17 +163,70 @@ function Place() {
                         <h2 className="font-semibold text-2xl">Description</h2>
                         {place.description}
                     </div>
-                    <div className="font-semibold">
-                        Check in: {place.checkIn}h
-                        <br />
-                        Check out: {place.checkOut}h
-                        <br />
-                        Max number of guests: {place.maxGuests}
+                    <div className="border-t border-gray-300 mt-6"></div>
+                    <div className="font-semibold mt-6">
+                        <div className="grid grid-cols-2 gap-2">
+                            <div className="flex items-center gap-2">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="w-6 h-6"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25"
+                                    />
+                                </svg>
+                                Check in: {place.checkIn}h
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="w-6 h-6"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"
+                                    />
+                                </svg>
+                                Check out: {place.checkOut}h
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="1.5"
+                                    stroke="currentColor"
+                                    className="w-6 h-6"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
+                                    />
+                                </svg>
+                                Max number of guests: {place.maxGuests}
+                            </div>
+                        </div>
                     </div>
+                    <div className="border-t border-gray-300 my-6"></div>
                     <div className="my-4">
                         <h2 className="font-semibold text-2xl">Extra info</h2>
-                        <div className="mt-2 text-sm text-gray-700 leading-4">{place.extraInfo}</div>
+                        {place.extraInfo}
                     </div>
+                    <div className="border-t border-gray-300 my-6"></div>
+                    <h2 className="font-semibold text-2xl">Where you’ll be</h2>
+                    <img src="https://www.google.com/maps/place/Ph%C3%BA+Qu%E1%BB%91c/@10.2288155,103.8173373,11z/data=!3m1!4b1!4m6!3m5!1s0x31a78c62b49eda17:0x8aa79fbbdd72cdb!8m2!3d10.289879!4d103.98402!16zL20vMDVtcG43" />
                 </div>
                 <div>
                     <BookingCard place={place} />

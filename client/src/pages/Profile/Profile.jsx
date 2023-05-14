@@ -7,7 +7,7 @@ import Places from '@/pages/Places';
 import AccountNav from '@/components/AccountNav';
 
 function Profile() {
-    const { user, ready, setUser } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
     const [redirect, setRedirect] = useState(null);
 
     let { subpage } = useParams();

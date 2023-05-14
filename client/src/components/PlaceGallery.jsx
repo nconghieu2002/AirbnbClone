@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 function PlaceGallery({ place }) {
     const [showAllPhotos, setShowAllPhotos] = useState(false);
@@ -6,25 +6,27 @@ function PlaceGallery({ place }) {
     if (showAllPhotos) {
         return (
             <div className="absolute inset-0 bg-white min-h-screen">
-                <button onClick={() => setShowAllPhotos(false)} className="fixed p-4 top-8 left-8 bg-transparent">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="w-6 h-6"
-                    >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                    </svg>
-                </button>
-                <div style={{ width: '720px' }} className="flex flex-col items-center m-auto mt-24 gap-2">
-                    {place?.photos?.length > 0 &&
-                        place.photos.map((photo, value) => (
-                            <div key={value}>
-                                <img className="object-cover" src={`http://localhost:4000/uploads/${photo}`} />
-                            </div>
-                        ))}
+                <div className="bg-white">
+                    <button onClick={() => setShowAllPhotos(false)} className="fixed p-4 top-8 left-8 bg-transparent">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className="w-6 h-6"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                        </svg>
+                    </button>
+                    <div style={{ width: '720px' }} className="flex flex-col items-center m-auto mt-24 gap-2">
+                        {place?.photos?.length > 0 &&
+                            place.photos.map((photo, value) => (
+                                <div key={value}>
+                                    <img className="object-cover" src={`http://localhost:4000/uploads/${photo}`} />
+                                </div>
+                            ))}
+                    </div>
                 </div>
             </div>
         );

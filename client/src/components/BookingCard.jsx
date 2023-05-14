@@ -44,6 +44,7 @@ function BookingCard({ place }) {
             const bookingId = response.data._id;
             setRedirect(`/account/bookings/${bookingId}`);
         } catch (error) {
+            alert('Vui lòng đăng nhập để sử dụng chức năng này');
             setRedirect(`/login`);
         }
     };
@@ -53,7 +54,7 @@ function BookingCard({ place }) {
     }
 
     return (
-        <div className="bg-white shadow p-4 rounded-2xl flex-shrink-0">
+        <div className="bg-white shadow p-4 rounded-2xl mt-16">
             <div className="text-2xl text-center">Price: {place.price} / per night</div>
             <div className="border rounded-2xl mt-4">
                 <div className="flex">
