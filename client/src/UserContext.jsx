@@ -18,7 +18,7 @@ export function UserContextProvider({ children }) {
                 .get('/profile')
                 .then(({ data }) => {
                     setUser(data);
-                    setReady(true);
+                    // setReady(true);
                 })
                 .catch((err) => {
                     if (err.response.status === 401) {

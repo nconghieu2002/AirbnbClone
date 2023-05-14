@@ -12,9 +12,9 @@ function Profile() {
 
     let { subpage } = useParams();
 
-    if (!ready) {
-        return 'Loading...';
-    }
+    // if (!ready) {
+    //     return 'Loading...';
+    // }
 
     if (subpage === undefined) {
         subpage = 'profile';
@@ -26,7 +26,7 @@ function Profile() {
         setUser(null);
     };
 
-    if (ready && !user && !redirect) return <Navigate to={'/login'} />;
+    if (!user && !redirect) return <Navigate to={'/login'} />;
 
     if (redirect) return <Navigate to={redirect} />;
 

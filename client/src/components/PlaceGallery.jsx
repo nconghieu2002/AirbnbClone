@@ -37,18 +37,18 @@ function PlaceGallery({ place }) {
                     {place.photos?.[0] && (
                         <img
                             onClick={() => setShowAllPhotos(true)}
-                            className="object-cover cursor-pointer"
+                            className="object-cover cursor-pointer w-full h-full"
                             src={`http://localhost:4000/uploads/${place.photos[0]}`}
                         />
                     )}
                 </div>
                 <div className="grid gap-2 grid-cols-[1fr_1fr]">
-                    <div className="grid">
+                    <div className="grid grid-rows-2">
                         <div className="overflow-hidden">
                             {place.photos?.[1] && (
                                 <img
                                     onClick={() => setShowAllPhotos(true)}
-                                    className="object-cover cursor-pointer relative -top-1"
+                                    className="object-cover cursor-pointer w-full h-full relative -top-1"
                                     src={`http://localhost:4000/uploads/${place.photos[1]}`}
                                 />
                             )}
@@ -57,18 +57,18 @@ function PlaceGallery({ place }) {
                             {place.photos?.[2] && (
                                 <img
                                     onClick={() => setShowAllPhotos(true)}
-                                    className="object-cover cursor-pointer relative top-1"
+                                    className="object-cover cursor-pointer w-full h-full relative top-1"
                                     src={`http://localhost:4000/uploads/${place.photos[2]}`}
                                 />
                             )}
                         </div>
                     </div>
-                    <div className="grid">
+                    <div className="grid grid-rows-2">
                         <div className="overflow-hidden">
                             {place.photos?.[3] && (
                                 <img
                                     onClick={() => setShowAllPhotos(true)}
-                                    className="object-cover cursor-pointer relative -top-1"
+                                    className="object-cover cursor-pointer w-full h-full relative -top-1"
                                     src={`http://localhost:4000/uploads/${place.photos[3]}`}
                                 />
                             )}
@@ -77,7 +77,7 @@ function PlaceGallery({ place }) {
                             {place.photos?.[4] && (
                                 <img
                                     onClick={() => setShowAllPhotos(true)}
-                                    className="object-cover cursor-pointer relative top-1"
+                                    className="object-cover cursor-pointer w-full h-full relative top-1"
                                     src={`http://localhost:4000/uploads/${place.photos[4]}`}
                                 />
                             )}

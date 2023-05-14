@@ -53,7 +53,7 @@ function BookingCard({ place }) {
     }
 
     return (
-        <div className="bg-white shadow p-4 rounded-2xl">
+        <div className="bg-white shadow p-4 rounded-2xl flex-shrink-0">
             <div className="text-2xl text-center">Price: {place.price} / per night</div>
             <div className="border rounded-2xl mt-4">
                 <div className="flex">
