@@ -33,7 +33,16 @@ bookingRouter.get('/bookings', authMiddleware, async (req, res) => {
         const userData = req.userData;
         res.json(await Booking.find({ user: userData.id }).populate('place'));
     } catch (err) {
-        res.json('err');
+        res.json({ message: err.message });
+    }
+});
+
+bookingRouter.delete('/bookings/:bookingId', authMiddleware, async (req, res) => {
+    try {
+        const { bookingId } = req.params;
+        res.json(await Booking.findByIdAndDelete(bookingId));
+    } catch (err) {
+        res.json({ message: err.message });
     }
 });
 

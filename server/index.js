@@ -11,6 +11,7 @@ import profileRouter from './routes/profileRoutes.js';
 import placeRouter from './routes/placeRoutes.js';
 import bookingRouter from './routes/bookingRoutes.js';
 import { config } from 'dotenv';
+import Place from './models/Place.js';
 config();
 
 const app = express();
@@ -64,6 +65,23 @@ app.post('/upload', photosMiddleware.array('photos', 100), (req, res) => {
     }
 
     res.json(uploadedFiles);
+});
+
+app.get('/search', async (req, res) => {
+    const { searchValue } = req.query;
+
+    try {
+        const searchResults = await Place.find({
+            $or: [
+                { title: { $regex: searchValue, $options: 'i' } },
+                { address: { $regex: searchValue, $options: 'i' } },
+            ],
+        });
+
+        res.json(searchResults);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 });
 
 app.listen(4000);

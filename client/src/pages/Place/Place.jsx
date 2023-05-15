@@ -225,8 +225,16 @@ function Place() {
                         {place.extraInfo}
                     </div>
                     <div className="border-t border-gray-300 my-6"></div>
-                    <h2 className="font-semibold text-2xl">Where you’ll be</h2>
-                    <img src="https://www.google.com/maps/place/Ph%C3%BA+Qu%E1%BB%91c/@10.2288155,103.8173373,11z/data=!3m1!4b1!4m6!3m5!1s0x31a78c62b49eda17:0x8aa79fbbdd72cdb!8m2!3d10.289879!4d103.98402!16zL20vMDVtcG43" />
+                    <h2 className="font-semibold text-2xl mb-4">Where you’ll be</h2>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d251289.97352936512!2d103.81733734508009!3d10.228815472026312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a78c62b49eda17%3A0x8aa79fbbdd72cdb!2zUGjDuiBRdeG7kWM!5e0!3m2!1svi!2s!4v1684126133870!5m2!1svi!2s"
+                        width="600"
+                        height="450"
+                        // style="border:0;"
+                        allowFullScreen=""
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
                 </div>
                 <div>
                     <BookingCard place={place} />

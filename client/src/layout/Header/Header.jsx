@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 
 import { UserContext } from '@/UserContext';
+import Search from '@/components/Search';
 
 function Header() {
     const { user } = useContext(UserContext);
@@ -14,29 +15,7 @@ function Header() {
                     <FaAirbnb />
                     <span>airbnb</span>
                 </Link>
-                <div className="flex items-center gap-2 border border-gray-300 rounded-full px-4 py-2 shadow-md shadow-gray-300">
-                    <div>Anywhere</div>
-                    <div className="h-5 border-l border-gray-300"></div>
-                    <div>Any week</div>
-                    <div className="h-5 border-l border-gray-300"></div>
-                    <div> Add guests</div>
-                    <button className="p-2 bg-primary text-white rounded-full">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="w-4 h-4"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                            />
-                        </svg>
-                    </button>
-                </div>
+                <Search />
                 <div className='flex items-center gap-6'>
                     <div className='cursor-pointer'>
                         <svg

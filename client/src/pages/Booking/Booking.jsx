@@ -34,10 +34,13 @@ function Booking() {
                     <h2 className="text-xl mb-4">Your booking information:</h2>
                     <BookingDate booking={booking} />
                 </div>
-                <div className='bg-primary p-6 text-white rounded-2xl'>
+                <button
+                    onClick={() => alert('Chưa cập nhật chức năng này')}
+                    className="cursor-pointer bg-primary p-6 text-white rounded-2xl flex flex-col items-center"
+                >
                     <div>Total price</div>
-                    <div className='text-3xl'>$ {booking.price}</div>
-                </div>
+                    <div className="text-3xl">${booking.price}</div>
+                </button>
             </div>
             <PlaceGallery place={booking.place} />
         </div>
