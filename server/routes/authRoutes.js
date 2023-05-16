@@ -43,7 +43,7 @@ authRouter.post('/login', async (req, res) => {
                         id: userDoc._id
                     },
                     process.env.JWT_SECRET,
-                    {},
+                    { expiresIn: '1h' },
                     (err, token) => {
                         if (err) {
                             throw err;

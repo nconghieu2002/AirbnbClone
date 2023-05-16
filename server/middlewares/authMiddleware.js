@@ -5,7 +5,7 @@ config();
 const authMiddleware = (req, res, next) => {
     const { token } = req.cookies;
 
-    jwt.verify(token, process.env.JWT_SECRET, {}, (err, userData) => {
+    jwt.verify(token, process.env.JWT_SECRET, { expiresIn: '1h' }, (err, userData) => {
         if (err) {
             return res.status(401).json({ message: 'Unauthorized' });
         } else {
