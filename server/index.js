@@ -26,7 +26,7 @@ app.use('/uploads', express.static(process.cwd() + '/uploads'));
 app.use(
     cors({
         credentials: true,
-        origin: 'http://localhost:5173'
+        origin: process.env.URL_FRONTEND
     })
 );
 
