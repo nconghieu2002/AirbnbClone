@@ -44,7 +44,7 @@ function BookingCard({ place }) {
             const bookingId = response.data._id;
             setRedirect(`/account/bookings/${bookingId}`);
         } catch (error) {
-            alert('Vui lòng đăng nhập để sử dụng chức năng này');
+            alert('Please log in to use this feature');
             setRedirect(`/login`);
         }
     };
@@ -83,7 +83,7 @@ function BookingCard({ place }) {
                 )}
             </div>
             <button onClick={bookThisPlace} className="primary mt-4">
-                Book this place{numberOfNights > 0 && <span>$ {numberOfNights * place.price}</span>}
+                Book this place {numberOfNights > 0 && <span>${numberOfNights * place.price}</span>}
             </button>
         </div>
     );

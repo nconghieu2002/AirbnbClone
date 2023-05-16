@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import AccountNav from '@/components/AccountNav';
+import Image from '@/components/Image';
 
 function Places() {
     const [places, setPlaces] = useState([]);
@@ -44,9 +45,9 @@ function Places() {
                         >
                             <div className="flex shrink-0 h-32 w-36">
                                 {place.photos.length > 0 && (
-                                    <img
+                                    <Image
                                         className="object-cover w-full h-full"
-                                        src={`http://localhost:4000/uploads/${place.photos[0]}`}
+                                        src={`${place.photos[0]}`}
                                         alt=""
                                     />
                                 )}

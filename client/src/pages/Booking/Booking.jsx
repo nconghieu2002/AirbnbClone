@@ -35,7 +35,7 @@ function Booking() {
                     <BookingDate booking={booking} />
                 </div>
                 <button
-                    onClick={() => alert('Chưa cập nhật chức năng này')}
+                    onClick={() => alert('This feature is not yet updated')}
                     className="cursor-pointer bg-primary p-6 text-white rounded-2xl flex flex-col items-center"
                 >
                     <div>Total price</div>

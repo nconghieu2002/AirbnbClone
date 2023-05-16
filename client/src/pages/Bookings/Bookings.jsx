@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import AccountNav from '@/components/AccountNav';
 import BookingDate from '@/components/BookingDate';
+import Image from '@/components/Image';
 
 function Bookings() {
     const [bookings, setBookings] = useState([]);
@@ -37,9 +38,9 @@ function Bookings() {
                             >
                                 <div className="w-48 h-40">
                                     {booking.place.photos.length > 0 && (
-                                        <img
+                                        <Image
                                             className="object-cover aspect-square w-full h-full"
-                                            src={`http://localhost:4000/uploads/${booking.place.photos[0]}`}
+                                            src={`${booking.place.photos[0]}`}
                                             alt=""
                                         />
                                     )}

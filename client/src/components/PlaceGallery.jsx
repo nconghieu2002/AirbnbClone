@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import Image from './Image';
+
 function PlaceGallery({ place }) {
     const [showAllPhotos, setShowAllPhotos] = useState(false);
 
@@ -23,7 +25,7 @@ function PlaceGallery({ place }) {
                         {place?.photos?.length > 0 &&
                             place.photos.map((photo, value) => (
                                 <div key={value}>
-                                    <img className="object-cover" src={`http://localhost:4000/uploads/${photo}`} />
+                                    <Image className="object-cover" src={`${photo}`} />
                                 </div>
                             ))}
                     </div>
@@ -37,10 +39,10 @@ function PlaceGallery({ place }) {
             <div className="grid gap-2 grid-cols-[1fr_1fr] rounded-2xl overflow-hidden">
                 <div>
                     {place.photos?.[0] && (
-                        <img
+                        <Image
                             onClick={() => setShowAllPhotos(true)}
                             className="object-cover cursor-pointer w-full h-full"
-                            src={`http://localhost:4000/uploads/${place.photos[0]}`}
+                            src={`${place.photos[0]}`}
                         />
                     )}
                 </div>
@@ -48,19 +50,19 @@ function PlaceGallery({ place }) {
                     <div className="grid grid-rows-2">
                         <div className="overflow-hidden">
                             {place.photos?.[1] && (
-                                <img
+                                <Image
                                     onClick={() => setShowAllPhotos(true)}
                                     className="object-cover cursor-pointer w-full h-full relative -top-1"
-                                    src={`http://localhost:4000/uploads/${place.photos[1]}`}
+                                    src={`${place.photos[1]}`}
                                 />
                             )}
                         </div>
                         <div className="overflow-hidden">
                             {place.photos?.[2] && (
-                                <img
+                                <Image
                                     onClick={() => setShowAllPhotos(true)}
                                     className="object-cover cursor-pointer w-full h-full relative top-1"
-                                    src={`http://localhost:4000/uploads/${place.photos[2]}`}
+                                    src={`${place.photos[2]}`}
                                 />
                             )}
                         </div>
@@ -68,19 +70,19 @@ function PlaceGallery({ place }) {
                     <div className="grid grid-rows-2">
                         <div className="overflow-hidden">
                             {place.photos?.[3] && (
-                                <img
+                                <Image
                                     onClick={() => setShowAllPhotos(true)}
                                     className="object-cover cursor-pointer w-full h-full relative -top-1"
-                                    src={`http://localhost:4000/uploads/${place.photos[3]}`}
+                                    src={`${place.photos[3]}`}
                                 />
                             )}
                         </div>
                         <div className="overflow-hidden">
                             {place.photos?.[4] && (
-                                <img
+                                <Image
                                     onClick={() => setShowAllPhotos(true)}
                                     className="object-cover cursor-pointer w-full h-full relative top-1"
-                                    src={`http://localhost:4000/uploads/${place.photos[4]}`}
+                                    src={`${place.photos[4]}`}
                                 />
                             )}
                         </div>

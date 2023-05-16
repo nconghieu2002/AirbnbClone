@@ -2,6 +2,7 @@ import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+import dbConnect from '../configs/connectDB.js';
 import User from '../models/User.js';
 import { config } from 'dotenv';
 config();
@@ -9,6 +10,8 @@ config();
 const authRouter = express.Router();
 
 authRouter.post('/register', async (req, res) => {
+    dbConnect();
+
     try {
         const { name, email, password } = req.body;
         const passwordHash = bcrypt.hashSync(password, 10);
@@ -26,6 +29,8 @@ authRouter.post('/register', async (req, res) => {
 });
 
 authRouter.post('/login', async (req, res) => {
+    dbConnect();
+
     try {
         const { email, password } = req.body;
         const userDoc = await User.findOne({ email });
@@ -58,6 +63,8 @@ authRouter.post('/login', async (req, res) => {
 });
 
 authRouter.post('/logout', (req, res) => {
+    dbConnect();
+
     res.cookie('token', '').json(true);
 });
 

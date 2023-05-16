@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import Image from '@/components/Image';
+
 function Home() {
     const [places, setPlaces] = useState([]);
 
@@ -17,10 +19,10 @@ function Home() {
                 places.map((place) => (
                     <Link to={`/place/${place._id}`} key={place._id}>
                         <div className="bg-gray-500 rounded-2xl flex mb-2">
-                            {place.photos.length > 0 && (
-                                <img
+                            {place.photos?.length > 0 && (
+                                <Image
                                     className="object-cover aspect-square rounded-2xl"
-                                    src={`http://localhost:4000/uploads/${place.photos[0]}`}
+                                    src={place.photos[0]}
                                     alt=""
                                 />
                             )}

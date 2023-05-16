@@ -1,11 +1,14 @@
 import express from 'express';
 
+import dbConnect from '../configs/connectDB.js';
 import authMiddleware from '../middlewares/authMiddleware.js';
 import Place from '../models/Place.js';
 
 const placeRouter = express.Router();
 
 placeRouter.post('/places', authMiddleware, async (req, res) => {
+    dbConnect();
+
     const userData = req.userData;
 
     const { title, address, addedPhotos, description, perks, extraInfo, checkIn, checkOut, maxGuests, price } =
@@ -29,6 +32,8 @@ placeRouter.post('/places', authMiddleware, async (req, res) => {
 });
 
 placeRouter.get('/user-places', authMiddleware, async (req, res) => {
+    dbConnect();
+
     const userData = req.userData;
 
     const { id } = userData;
@@ -36,11 +41,15 @@ placeRouter.get('/user-places', authMiddleware, async (req, res) => {
 });
 
 placeRouter.get('/places/:id', async (req, res) => {
+    dbConnect();
+
     const { id } = req.params;
     res.json(await Place.findById(id).populate('owner'));
 });
 
 placeRouter.put('/places', authMiddleware, async (req, res) => {
+    dbConnect();
+
     const userData = req.userData;
 
     const { id, title, address, addedPhotos, description, perks, extraInfo, checkIn, checkOut, maxGuests, price } =
@@ -66,6 +75,8 @@ placeRouter.put('/places', authMiddleware, async (req, res) => {
 });
 
 placeRouter.get('/places', async (req, res) => {
+    dbConnect();
+
     res.json(await Place.find());
 });
 

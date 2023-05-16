@@ -1,10 +1,13 @@
 import express from 'express';
 
+import dbConnect from '../configs/connectDB.js';
 import Place from '../models/Place.js';
 
 const searchRouter = express.Router();
 
 searchRouter.get('/search', async (req, res) => {
+    dbConnect();
+
     const { searchValue } = req.query;
 
     try {
