@@ -1,7 +1,6 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import cookieParser from 'cookie-parser';
 
 import dbConnect from '../configs/connectDB.js';
 import User from '../models/User.js';
@@ -9,8 +8,6 @@ import { config } from 'dotenv';
 config();
 
 const authRouter = express.Router();
-
-authRouter.use(cookieParser())
 
 authRouter.post('/register', async (req, res) => {
     dbConnect();
