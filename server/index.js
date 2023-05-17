@@ -6,6 +6,7 @@ import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import multer from 'multer';
 import fs from 'fs';
 import mime from 'mime-types';
+import cookieParser from 'cookie-parser';
 
 import dbConnect from './configs/connectDB.js';
 import authRouter from './routes/authRoutes.js';
