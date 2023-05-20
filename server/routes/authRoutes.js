@@ -48,11 +48,14 @@ authRouter.post('/login', async (req, res) => {
                         if (err) {
                             throw err;
                         }
-                        const action = {
-                            sameSite: 'none',
-                            secure: true,
-                            expires: new Date(Date.now() + 60*60*1000)
-                        };
+                        console.log(req.headers.host);
+                        const action = req.headers.host.includes('localhost')
+                            ? undefined
+                            : {
+                                  sameSite: 'none',
+                                  secure: true,
+                                  expires: new Date(Date.now() + 60 * 60 * 1000)
+                              };
                         res.cookie('token', token, action).json(userDoc);
                     }
                 );
