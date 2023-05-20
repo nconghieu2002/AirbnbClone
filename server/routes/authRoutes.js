@@ -49,7 +49,8 @@ authRouter.post('/login', async (req, res) => {
                             throw err;
                         }
                         const action = {
-                            sameSite: 'none'
+                            sameSite: 'none',
+                            secure: true
                         };
                         res.cookie('token', token, action).json(userDoc);
                     }
