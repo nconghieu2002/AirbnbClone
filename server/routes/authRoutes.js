@@ -48,13 +48,7 @@ authRouter.post('/login', async (req, res) => {
                         if (err) {
                             throw err;
                         }
-                        const options = {
-                            expires: new Date(Date.now() + 1 * 60 * 60 * 1000), // Thời gian hết hạn của cookie (1 giờ)
-                            httpOnly: true, // Chỉ cho phép truy cập cookie qua HTTP, không cho phép qua JavaScript
-                            secure: true // Chỉ sử dụng cookie khi kết nối HTTPS
-                            // Thêm các tùy chọn khác của cookie tại đây
-                        };
-                        res.cookie('token', token, options).json(userDoc);
+                        res.cookie('token', token).json(userDoc);
                     }
                 );
             } else {
