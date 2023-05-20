@@ -19,9 +19,9 @@ export function UserContextProvider({ children }) {
                     setUser(data);
                 })
                 .catch((err) => {
-                    if (err.response.status === 401) {
-                        return navigate('/login');
-                    }
+                    // if (err.response.status === 401) {
+                    //     return navigate('/login');
+                    // }
                 });
         }
     }, []);
