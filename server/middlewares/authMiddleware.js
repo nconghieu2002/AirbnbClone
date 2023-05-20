@@ -3,7 +3,7 @@ import { config } from 'dotenv';
 config();
 
 const authMiddleware = (req, res, next) => {
-    const { token } = req.cookies;
+    const { authorization } = req.headers;
 
     jwt.verify(token, process.env.JWT_SECRET, { expiresIn: '1h' }, (err, userData) => {
         if (err) {

@@ -50,7 +50,8 @@ authRouter.post('/login', async (req, res) => {
                         }
                         const action = {
                             sameSite: 'none',
-                            secure: true
+                            secure: true,
+                            expires: new Date(Date.now() + 60*60*1000)
                         };
                         res.cookie('token', token, action).json(userDoc);
                     }
