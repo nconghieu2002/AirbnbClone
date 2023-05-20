@@ -52,7 +52,6 @@ authRouter.post('/login', async (req, res) => {
                         const action = req.headers.host.includes('localhost')
                             ? undefined
                             : {
-                                  domain: 'airbnb-clone-ttnu.onrender.com',
                                   sameSite: 'none',
                                   secure: true,
                                   expires: new Date(Date.now() + 60 * 60 * 1000)
