@@ -52,7 +52,7 @@ authRouter.post('/login', async (req, res) => {
                         const action = req.headers.host.includes('localhost')
                             ? undefined
                             : {
-                                  domain: 'https://airbnb-clone-khaki-beta.vercel.app',
+                                  domain: 'vercel.app',
                                   sameSite: 'none',
                                   secure: true,
                                   expires: new Date(Date.now() + 60 * 60 * 1000)
