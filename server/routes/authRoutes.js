@@ -49,7 +49,8 @@ authRouter.post('/login', async (req, res) => {
                             throw err;
                         }
                         const action = {
-                            domain: 'airbnb-clone-khaki-beta.vercel.app'
+                            domain: 'airbnb-clone-khaki-beta.vercel.app',
+                            sameSite: 'none'
                         };
                         res.cookie('token', token, action).json(userDoc);
                     }
