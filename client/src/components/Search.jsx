@@ -49,7 +49,7 @@ function Search() {
         <div className="relative">
             <div
                 onClick={toggleInput}
-                className="flex items-center gap-2 border border-gray-300 rounded-full px-4 shadow-md shadow-gray-300"
+                className="flex items-center gap-2 border border-gray-300 rounded-full px-4 shadow-md shadow-gray-300 hover:shadow-gray-400 transition-shadow duration-500"
             >
                 <input
                     ref={inputRef}

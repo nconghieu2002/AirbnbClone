@@ -9,15 +9,15 @@ function Header() {
     const { user } = useContext(UserContext);
 
     return (
-        <div>
-            <header className="flex justify-between">
+        <div >
+            <header className="border-b border-gray-200 fixed top-0 flex justify-between items-center w-screen px-20 h-20 bg-white z-20">
                 <Link to={'/'} className="flex items-center gap-1 text-2xl font-semibold text-primary">
                     <FaAirbnb />
                     <span>airbnb</span>
                 </Link>
                 <Search />
                 <div className='flex items-center gap-6'>
-                    <div className='cursor-pointer'>
+                    <div className='cursor-pointer flex items-center justify-center rounded-full w-8 h-8 hover:bg-gray-300 duration-500 transition-bg'>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -35,7 +35,7 @@ function Header() {
                     </div>
                     <Link
                         to={user ? '/account' : '/login'}
-                        className="flex gap-2 border border-gray-300 rounded-full px-4 py-2 items-center"
+                        className="flex gap-2 border border-gray-300 rounded-full px-4 py-2 items-center mr-4 hover:shadow-md transition:shadow duration-500"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

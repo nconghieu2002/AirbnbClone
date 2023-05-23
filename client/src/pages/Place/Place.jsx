@@ -138,7 +138,7 @@ function Place() {
     if (!place) return;
 
     return (
-        <div className="mt-4 bg-gray-100 -mx-20 px-20 py-8">
+        <div className=" bg-gray-100 -mx-20 -mt-8 px-20 py-8">
             <h1 className="text-3xl">{place.title}</h1>
             <AddressLink children={place.address} className="my-3" />
             <PlaceGallery place={place} />

@@ -2,9 +2,9 @@ import Header from '@/layout/Header';
 
 function DefaultLayout({ children }) {
     return (
-        <div className='py-4 px-20'>
+        <div className=''>
             <Header />
-            <div>{children}</div>
+            <div className='mt-28 px-20'>{children}</div>
         </div>
     );
 }

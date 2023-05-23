@@ -18,10 +18,10 @@ function Home() {
             {places.length > 0 &&
                 places.map((place) => (
                     <Link to={`/place/${place._id}`} key={place._id}>
-                        <div className="bg-gray-500 rounded-2xl flex mb-2">
+                        <div className="bg-gray-500 rounded-2xl flex mb-2 hover:scale-105 duration-500">
                             {place.photos?.length > 0 && (
                                 <Image
-                                    className="object-cover aspect-square rounded-2xl"
+                                    className="object-cover aspect-square rounded-2xl "
                                     src={place.photos[0]}
                                     alt=""
                                 />
@@ -30,7 +30,7 @@ function Home() {
                         <h3 className="text-sm font-bold truncate">{place.address}</h3>
                         <h2 className="text-sm text-gray-500 truncate">{place.title}</h2>
                         <div className="mt-1">
-                            <span className="font-bold">${place.price}</span> per night
+                            <span className="font-bold text-primary">${place.price}</span> per night
                         </div>
                     </Link>
                 ))}

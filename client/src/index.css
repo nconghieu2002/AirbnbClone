@@ -12,9 +12,17 @@ textarea {
 }
 
 button {
-    @apply bg-gray-300;
+    @apply bg-gray-300 transition-opacity duration-500;
+}
+
+button:hover {
+    @apply opacity-80;
 }
 
 button.primary {
-    @apply bg-primary p-2 w-full text-white rounded-2xl;
+    @apply bg-primary p-2 w-full text-white rounded-2xl transition-opacity duration-500;
+}
+
+button.primary:hover {
+    @apply opacity-80;
 }

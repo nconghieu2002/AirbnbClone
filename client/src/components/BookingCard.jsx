@@ -55,18 +55,34 @@ function BookingCard({ place }) {
 
     return (
         <div className="bg-white shadow p-4 rounded-2xl mt-16">
-            <div className="text-2xl text-center">Price: {place.price} / per night</div>
+            <div className="text-2xl text-center">Price: <span className='text-primary'>{place.price}</span>/per night</div>
             <div className="border rounded-2xl mt-4">
                 <div className="flex">
                     <div className="py-3 px-4 w-1/2">
-                        <label>Check in:</label>
+                        <label htmlFor="check-in-input" className="cursor-pointer">
+                            Check in:
+                        </label>
                         <br />
-                        <input value={checkIn} onChange={(e) => setCheckIn(e.target.value)} type="date" />
+                        <input
+                            id="check-in-input"
+                            className="cursor-pointer"
+                            value={checkIn}
+                            onChange={(e) => setCheckIn(e.target.value)}
+                            type="date"
+                        />
                     </div>
                     <div className="py-3 px-4 border-l">
-                        <label>Check out:</label>
+                        <label htmlFor="check-out-input" className="cursor-pointer">
+                            Check out:
+                        </label>
                         <br />
-                        <input value={checkOut} onChange={(e) => setCheckOut(e.target.value)} type="date" />
+                        <input
+                            id="check-out-input"
+                            className="cursor-pointer"
+                            value={checkOut}
+                            onChange={(e) => setCheckOut(e.target.value)}
+                            type="date"
+                        />
                     </div>
                 </div>
                 <div className="py-3 px-4 border-t">
@@ -83,7 +99,7 @@ function BookingCard({ place }) {
                 )}
             </div>
             <button onClick={bookThisPlace} className="primary mt-4">
-                Book this place {numberOfNights > 0 && <span>${numberOfNights * place.price}</span>}
+                Book this place {numberOfNights > 0 && <span className='font-semibold'>${numberOfNights * place.price}</span>}
             </button>
         </div>
     );
